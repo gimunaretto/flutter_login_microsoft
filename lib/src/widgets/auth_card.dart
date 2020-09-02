@@ -618,7 +618,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             width: 20,
             height: 20,
           ),
-          label: Text('Login with Microsoft'),
+          label: Text('Microsoft'),
           onPressed: () {
             widget.onMicrosoftLogin();
           },
