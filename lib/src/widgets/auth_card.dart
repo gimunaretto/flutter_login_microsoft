@@ -596,35 +596,87 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
   // }
 
   Widget _buildSubmitButton(
-      ThemeData theme, LoginMessages messages, Auth auth) {
-    return ScaleTransition(
-      scale: _buttonScaleAnimation,
-      child: AnimatedButton(
-        controller: _submitController,
-        text: auth.isLogin ? messages.loginButton : messages.signupButton,
-        onPressed: _submit,
-      ),
-    );
-  }
-
-  Widget microsoftButton(ThemeData theme) {
+      ThemeData theme, LoginMessages messages, Auth auth, double width) {
     return ScaleTransition(
         scale: _buttonScaleAnimation,
-        child: RaisedButton.icon(
-          color: theme.primaryColor,
-          textColor: Colors.white,
-          icon: Image.asset(
-            'assets/images/microsoft.png',
-            width: 20,
-            height: 20,
+        child: Container(
+          height: 40,
+          width: width,
+          child: RaisedButton(
+            color: theme.buttonColor,
+            textColor: Colors.white,
+            child: Text(
+              '${auth.isLogin ? messages.loginButton : messages.signupButton}',
+            ),
+            onPressed: () {
+              _submit();
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(100.0),
+                side: BorderSide(color: theme.buttonColor)),
           ),
-          label: Text('Microsoft'),
-          onPressed: () {
-            widget.onMicrosoftLogin();
-          },
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(18.0),
-              side: BorderSide(color: Theme.of(context).primaryColor)),
+        ));
+  }
+
+  // Widget _buildSubmitButton(
+  //     ThemeData theme, LoginMessages messages, Auth auth) {
+  //   return ScaleTransition(
+  //     scale: _buttonScaleAnimation,
+  //     child: AnimatedButton(
+  //       controller: _submitController,
+  //       text: auth.isLogin ? messages.loginButton : messages.signupButton,
+  //       onPressed: _submit,
+  //     ),
+  //   );
+  // }
+
+  Widget optionText(double width) {
+    return ScaleTransition(
+        scale: _buttonScaleAnimation,
+        child: Container(
+          height: 40,
+          width: width,
+          alignment: Alignment.center,
+          child: Row(children: <Widget>[
+            Expanded(
+                child: Divider(
+              thickness: 1,
+            )),
+            Text(
+              " ou faça login com microsoft ".toUpperCase(),
+              style: TextStyle(fontSize: 12),
+            ),
+            Expanded(
+                child: Divider(
+              thickness: 1,
+            )),
+          ]),
+        ));
+  }
+
+  Widget microsoftButton(ThemeData theme, double width) {
+    return ScaleTransition(
+        scale: _buttonScaleAnimation,
+        child: Container(
+          height: 40,
+          width: width,
+          // alignment: Alignment.center,
+          child: RaisedButton.icon(
+            color: theme.primaryColor,
+            textColor: Colors.white,
+            icon: Image.asset(
+              'assets/images/microsoft.png',
+              width: 15,
+              height: 15,
+            ),
+            label: Text('MICROSOFT'),
+            onPressed: () {
+              widget.onMicrosoftLogin();
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(100.0),
+                side: BorderSide(color: Theme.of(context).primaryColor)),
+          ),
         ));
   }
 
@@ -702,9 +754,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
               children: <Widget>[
                 // _buildForgotPassword(theme, messages),
                 SizedBox(height: 20),
-                _buildSubmitButton(theme, messages, auth),
-                SizedBox(height: 20),
-                microsoftButton(theme),
+                _buildSubmitButton(theme, messages, auth, textFieldWidth),
+                optionText(textFieldWidth),
+                microsoftButton(theme, textFieldWidth),
                 // _buildSwitchAuthButton(theme, messages, auth),
               ],
             ),
