@@ -727,7 +727,6 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
                 _buildNameField(textFieldWidth, messages, auth),
                 SizedBox(height: 20),
                 _buildPasswordField(textFieldWidth, messages, auth),
-                SizedBox(height: 10),
               ],
             ),
           ),
