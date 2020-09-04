@@ -756,6 +756,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
                 _buildSubmitButton(theme, messages, auth, textFieldWidth),
                 optionText(textFieldWidth),
                 microsoftButton(theme, textFieldWidth),
+                SizedBox(height: 10),
                 // _buildSwitchAuthButton(theme, messages, auth),
               ],
             ),
