@@ -644,7 +644,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             )),
             Text(
               " ou faça login com microsoft ".toUpperCase(),
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 10),
             ),
             Expanded(
                 child: Divider(
