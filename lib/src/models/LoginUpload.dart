@@ -13,3 +13,18 @@ class LoginUpload {
 
   Map<String, dynamic> toJson() => _$LoginUploadToJson(this);
 }
+
+@JsonSerializable()
+class User {
+  String usuario;
+  String senha;
+
+  User.fromJson(Map<String, dynamic> json)
+      : usuario = json['Usuario'],
+        senha = json['Senha'];
+
+  Map<String, dynamic> toJson() => {
+        'Usuario': usuario,
+        'Senha': senha,
+      };
+}
