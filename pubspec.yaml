@@ -1,4 +1,4 @@
-name: flutter_login
+name: flutter_login_microsoft
 description: A login widget with login/signup functionalities to help speed up development
 version: 1.0.14
 author: NearHuscarl <near.huscarl@gmail.com>
@@ -29,37 +29,8 @@ dev_dependencies:
   mockito: ^4.1.1
 
 
-
-
-
 flutter:
   
   assets:
     - assets/images/ecorp.png
     - assets/images/logo_branco_brlog.png
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  

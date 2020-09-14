@@ -488,13 +488,13 @@
       "languageVersion": "2.4"
     },
     {
-      "name": "flutter_login",
+      "name": "flutter_login_microsoft",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.2"
     }
   ],
-  "generated": "2020-09-11T19:22:13.468078Z",
+  "generated": "2020-09-14T18:02:55.393254Z",
   "generator": "pub",
   "generatorVersion": "2.9.2"
 }
