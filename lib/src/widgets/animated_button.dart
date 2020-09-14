@@ -10,6 +10,7 @@ class AnimatedButton extends StatefulWidget {
     @required this.text,
     @required this.onPressed,
     @required this.controller,
+    this.width,
     this.loadingColor,
     this.color,
   }) : super(key: key);
@@ -19,6 +20,7 @@ class AnimatedButton extends StatefulWidget {
   final Color loadingColor;
   final Function onPressed;
   final AnimationController controller;
+  final double width;
 
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();
@@ -206,7 +208,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
               sizeFactor: _sizeAnimation,
               axis: Axis.horizontal,
               child: Container(
-                width: _width,
+                width: widget.width,
                 height: _height,
                 alignment: Alignment.center,
                 child: _buildButtonAutoSizeText(theme),
