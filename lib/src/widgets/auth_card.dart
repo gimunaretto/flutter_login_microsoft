@@ -8,10 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
 import '../constants.dart';
 import 'animated_button.dart';
-// import 'animated_text.dart';
 import 'custom_page_transformer.dart';
 import 'expandable_container.dart';
-// import 'fade_in.dart';
 import 'animated_text_form_field.dart';
 import '../providers/auth.dart';
 import '../providers/login_messages.dart';
@@ -32,35 +30,43 @@ class AuthCard extends StatefulWidget {
     this.onMicrosoftLogin,
   }) : super(key: key);
 
-  final EdgeInsets padding;
   final AnimationController loadingController;
   final FormFieldValidator<String> loginValidator;
-  final FormFieldValidator<String> senhaValidator;
+  final Function onMicrosoftLogin;
   final Function onSubmit;
   final Function onSubmitCompleted;
-  final Function onMicrosoftLogin;
+  final EdgeInsets padding;
+  final FormFieldValidator<String> senhaValidator;
 
   @override
   AuthCardState createState() => AuthCardState();
 }
 
 class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
-  GlobalKey _cardKey = GlobalKey();
-
-  var _isLoadingFirstTime = true;
-  var _pageIndex = 0;
   static const cardSizeScaleEnd = .2;
 
-  TransformerPageController _pageController;
-  AnimationController _formLoadingController;
-  AnimationController _routeTransitionController;
-  Animation<double> _flipAnimation;
-  Animation<double> _cardSizeAnimation;
-  Animation<double> _cardSize2AnimationX;
-  Animation<double> _cardSize2AnimationY;
-  Animation<double> _cardRotationAnimation;
+  GlobalKey _cardKey = GlobalKey();
   Animation<double> _cardOverlayHeightFactorAnimation;
   Animation<double> _cardOverlaySizeAndOpacityAnimation;
+  Animation<double> _cardRotationAnimation;
+  Animation<double> _cardSize2AnimationX;
+  Animation<double> _cardSize2AnimationY;
+  Animation<double> _cardSizeAnimation;
+  Animation<double> _flipAnimation;
+  AnimationController _formLoadingController;
+  var _isLoadingFirstTime = true;
+  TransformerPageController _pageController;
+  var _pageIndex = 0;
+  AnimationController _routeTransitionController;
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _formLoadingController.dispose();
+    _pageController.dispose();
+    _routeTransitionController.dispose();
+  }
 
   @override
   void initState() {
@@ -121,15 +127,6 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
       parent: _routeTransitionController,
       curve: Interval(.72727272, 1 /* ~300ms */, curve: Curves.easeInOutCubic),
     ));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-
-    _formLoadingController.dispose();
-    _pageController.dispose();
-    _routeTransitionController.dispose();
   }
 
   void _switchRecovery(bool recovery) {
@@ -346,42 +343,50 @@ class _LoginCard extends StatefulWidget {
 
   final AnimationController loadingController;
   final FormFieldValidator<String> loginValidator;
-  final FormFieldValidator<String> senhaValidator;
-  final Function onSwitchRecoveryPassword;
   final Function onMicrosoftLogin;
-  final Function onSwitchAuth;
   final Function onSubmitCompleted;
+  final Function onSwitchAuth;
+  final Function onSwitchRecoveryPassword;
+  final FormFieldValidator<String> senhaValidator;
 
   @override
   _LoginCardState createState() => _LoginCardState();
 }
 
 class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
-  final GlobalKey<FormState> _formKey = GlobalKey();
-
-  final _senhaFocusNode = FocusNode();
-  final _confirmPasswordFocusNode = FocusNode();
-
-  TextEditingController _nameController;
-  TextEditingController _passController;
+  Animation<double> _buttonScaleAnimation;
   TextEditingController _confirmPassController;
-
+  final _confirmPasswordFocusNode = FocusNode();
+  final GlobalKey<FormState> _formKey = GlobalKey();
   var _isLoading = false;
   var _isSubmitting = false;
-  var _showShadow = true;
 
   /// switch between login and signup
   AnimationController _loadingController;
-  AnimationController _switchAuthController;
-  AnimationController _postSwitchAuthController;
-  AnimationController _submitController;
 
+  TextEditingController _nameController;
   Interval _nameTextFieldLoadingAnimationInterval;
+  TextEditingController _passController;
   Interval _passTextFieldLoadingAnimationInterval;
+  AnimationController _postSwitchAuthController;
+  final _senhaFocusNode = FocusNode();
+  var _showShadow = true;
+  AnimationController _submitController;
+  AnimationController _switchAuthController;
   // Interval _textButtonLoadingAnimationInterval;
-  Animation<double> _buttonScaleAnimation;
 
-  bool get buttonEnabled => !_isLoading && !_isSubmitting;
+  @override
+  void dispose() {
+    super.dispose();
+
+    _loadingController?.removeStatusListener(handleLoadingAnimationStatus);
+    _senhaFocusNode.dispose();
+    _confirmPasswordFocusNode.dispose();
+
+    _switchAuthController.dispose();
+    _postSwitchAuthController.dispose();
+    _submitController.dispose();
+  }
 
   @override
   void initState() {
@@ -425,6 +430,8 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     ));
   }
 
+  bool get buttonEnabled => !_isLoading && !_isSubmitting;
+
   void handleLoadingAnimationStatus(AnimationStatus status) {
     if (status == AnimationStatus.forward) {
       setState(() => _isLoading = true);
@@ -432,19 +439,6 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     if (status == AnimationStatus.completed) {
       setState(() => _isLoading = false);
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-
-    _loadingController?.removeStatusListener(handleLoadingAnimationStatus);
-    _senhaFocusNode.dispose();
-    _confirmPasswordFocusNode.dispose();
-
-    _switchAuthController.dispose();
-    _postSwitchAuthController.dispose();
-    _submitController.dispose();
   }
 
   // void _switchAuthMode() {
@@ -703,7 +697,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _buildNameField(textFieldWidth, messages, auth),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 _buildPasswordField(textFieldWidth, messages, auth),
               ],
             ),
@@ -729,13 +723,11 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             width: cardWidth,
             child: Column(
               children: <Widget>[
-                // _buildForgotPassword(theme, messages),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 _buildSubmitButton(theme, messages, auth, textFieldWidth),
                 optionText(textFieldWidth),
                 microsoftButton(theme, textFieldWidth),
                 SizedBox(height: 10),
-                // _buildSwitchAuthButton(theme, messages, auth),
               ],
             ),
           ),
@@ -769,12 +761,15 @@ class _RecoverCard extends StatefulWidget {
 class _RecoverCardState extends State<_RecoverCard>
     with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formRecoverKey = GlobalKey();
-
-  TextEditingController _nameController;
-
   var _isSubmitting = false;
-
+  TextEditingController _nameController;
   AnimationController _submitController;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _submitController.dispose();
+  }
 
   @override
   void initState() {
@@ -787,12 +782,6 @@ class _RecoverCardState extends State<_RecoverCard>
       vsync: this,
       duration: Duration(milliseconds: 1000),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _submitController.dispose();
   }
 
   Future<bool> _submit() async {
