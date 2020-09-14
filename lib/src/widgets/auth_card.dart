@@ -697,7 +697,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _buildNameField(textFieldWidth, messages, auth),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 _buildPasswordField(textFieldWidth, messages, auth),
               ],
             ),
@@ -723,7 +723,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             width: cardWidth,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 _buildSubmitButton(theme, messages, auth, textFieldWidth),
                 optionText(textFieldWidth),
                 microsoftButton(theme, textFieldWidth),
