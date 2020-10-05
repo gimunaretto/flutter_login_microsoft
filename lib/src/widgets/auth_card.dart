@@ -681,6 +681,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     final deviceSize = MediaQuery.of(context).size;
     final cardWidth = min(deviceSize.width * 0.75, 360.0);
     const cardPadding = 16.0;
+    const cardPaddingHorizontal = 20.0;
     final textFieldWidth = cardWidth - cardPadding * 2;
     final authForm = Form(
       key: _formKey,
@@ -712,7 +713,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             color: theme.cardTheme.color,
             width: cardWidth,
             padding: EdgeInsets.symmetric(
-              horizontal: cardPadding,
+              horizontal: cardPaddingHorizontal,
               vertical: 10,
             ),
             onExpandCompleted: () => _postSwitchAuthController.forward(),
