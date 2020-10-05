@@ -522,7 +522,7 @@ class _FlutterLoginState extends State<FlutterLogin>
         highlightElevation: buttonTheme.highlightElevation ?? 2.0,
         shape: buttonTheme.shape ?? StadiumBorder(),
       ),
-      // put it here because floatingActionButtonTheme doesnt have highlightColor property
+      // put it here because floatingActionButtonTheme doesn't have highlightColor property
       highlightColor:
           loginTheme.buttonTheme.highlightColor ?? theme.highlightColor,
       textTheme: theme.textTheme.copyWith(
@@ -539,7 +539,7 @@ class _FlutterLoginState extends State<FlutterLogin>
     final loginTheme = widget.theme ?? LoginTheme();
     final theme = _mergeTheme(theme: Theme.of(context), loginTheme: loginTheme);
     final deviceSize = MediaQuery.of(context).size;
-    const headerMargin = 15;
+    const headerMargin = 10;
     const cardInitialHeight = 300;
     final cardTopPosition = deviceSize.height / 2 - cardInitialHeight / 2;
     final headerHeight = cardTopPosition - headerMargin;
@@ -598,17 +598,11 @@ class _FlutterLoginState extends State<FlutterLogin>
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        child: Stack(
-                          children: <Widget>[
-                            Positioned(
-                              child: Image.asset(
-                                  'assets/images/logo_branco_brlog.png',
-                                  filterQuality: FilterQuality.high,
-                                  height: 80,
-                                  alignment: Alignment.bottomCenter),
-                            )
-                          ],
-                        ),
+                        child: Image.asset(
+                            'assets/images/logo_branco_brlog.png',
+                            filterQuality: FilterQuality.high,
+                            height: 80,
+                            alignment: Alignment.bottomCenter),
                       ),
                     )
                   ],
