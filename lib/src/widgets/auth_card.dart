@@ -681,7 +681,6 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     final deviceSize = MediaQuery.of(context).size;
     final cardWidth = min(deviceSize.width * 0.75, 360.0);
     const cardPadding = 16.0;
-    const cardPaddingHorizontal = 20.0;
     final textFieldWidth = cardWidth - cardPadding * 2;
     final authForm = Form(
       key: _formKey,
@@ -698,7 +697,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _buildNameField(textFieldWidth, messages, auth),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 _buildPasswordField(textFieldWidth, messages, auth),
               ],
             ),
@@ -713,7 +712,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             color: theme.cardTheme.color,
             width: cardWidth,
             padding: EdgeInsets.symmetric(
-              horizontal: cardPaddingHorizontal,
+              horizontal: cardPadding,
               vertical: 10,
             ),
             onExpandCompleted: () => _postSwitchAuthController.forward(),
@@ -724,7 +723,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             width: cardWidth,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 _buildSubmitButton(theme, messages, auth, textFieldWidth),
                 optionText(textFieldWidth),
                 microsoftButton(theme, textFieldWidth),

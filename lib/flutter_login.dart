@@ -601,7 +601,7 @@ class _FlutterLoginState extends State<FlutterLogin>
                         child: Image.asset(
                             'assets/images/logo_branco_brlog.png',
                             filterQuality: FilterQuality.high,
-                            height: 80,
+                            height: 80.0,
                             alignment: Alignment.bottomCenter),
                       ),
                     )
