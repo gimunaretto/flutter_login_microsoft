@@ -373,8 +373,8 @@ class _FlutterLoginState extends State<FlutterLogin>
       child: Row(
         key: kDebugToolbarKey,
         children: <Widget>[
-          RaisedButton(
-            color: Colors.green,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(primary: Colors.green),
             child: AutoSizeText('OPTIONS', style: textStyle),
             onPressed: () {
               timeDilation = 1.0;
@@ -402,21 +402,24 @@ class _FlutterLoginState extends State<FlutterLogin>
               });
             },
           ),
-          RaisedButton(
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            color: Colors.blue,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                primary: Colors.blue),
             child: AutoSizeText('LOADING', style: textStyle),
             onPressed: () => authCardKey.currentState.runLoadingAnimation(),
           ),
-          RaisedButton(
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            color: Colors.orange,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                primary: Colors.orange),
             child: AutoSizeText('PAGE', style: textStyle),
             onPressed: () => authCardKey.currentState.runChangePageAnimation(),
           ),
-          RaisedButton(
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            color: Colors.red,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                primary: Colors.red),
             child: AutoSizeText('NAV', style: textStyle),
             onPressed: () => authCardKey.currentState.runChangeRouteAnimation(),
           ),

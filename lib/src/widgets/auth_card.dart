@@ -633,9 +633,13 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
           height: 40,
           width: width,
           // alignment: Alignment.center,
-          child: RaisedButton.icon(
-            color: theme.primaryColor,
-            textColor: Colors.white,
+          child: TextButton.icon(
+            style: TextButton.styleFrom(
+                backgroundColor: theme.primaryColor,
+                primary: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(100.0),
+                    side: BorderSide(color: Theme.of(context).primaryColor))),
             icon: Image.asset(
               'assets/images/microsoft.png',
               width: 15,
@@ -645,9 +649,6 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             onPressed: () {
               widget.onMicrosoftLogin();
             },
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(100.0),
-                side: BorderSide(color: Theme.of(context).primaryColor)),
           ),
         ));
   }
@@ -833,7 +834,7 @@ class _RecoverCardState extends State<_RecoverCard>
   }
 
   Widget _buildBackButton(ThemeData theme, LoginMessages messages) {
-    return FlatButton(
+    return TextButton(
       child: AutoSizeText(messages.goBackButton),
       onPressed: !_isSubmitting
           ? () {
@@ -841,9 +842,10 @@ class _RecoverCardState extends State<_RecoverCard>
               widget.onSwitchLogin();
             }
           : null,
-      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      textColor: theme.primaryColor,
+      style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          primary: theme.primaryColor),
     );
   }
 
